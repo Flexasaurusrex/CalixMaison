@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calix Maison — Weekly Curated Art Auctions</title>
+    <title>Calix Maison - The House of Grails</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,414 +17,314 @@
 
         :root {
             --gold: #C9A96E;
-            --gold-light: #D4B886;
-            --gold-dark: #B8945A;
-            --black: #0A0A0A;
-            --off-black: #1A1A1A;
-            --warm-white: #FAFAF8;
-            --warm-gray: #E8E6E3;
-            --mid-gray: #9B9B9B;
-            --shadow-soft: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.12);
-            --shadow-strong: rgba(0, 0, 0, 0.18);
+            --black: #1a1a1a;
+            --white: #fafaf8;
+            --off-white: #f5f5f3;
+            --light-gray: #e8e8e6;
+            --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.12);
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--warm-white);
+            background: var(--white);
             color: var(--black);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
-        .serif {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Landing Page */
-        .landing-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+        /* HEADER */
+        header {
             background: var(--black);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .landing-page.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .landing-video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .landing-video {
-            max-width: 90%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .enter-button {
-            position: absolute;
-            bottom: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 18px 48px;
-            font-size: 14px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .enter-button:hover {
-            background: var(--gold);
-            color: var(--black);
-            transform: translateX(-50%) translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201, 169, 110, 0.3);
-        }
-
-        /* Header */
-        .header {
-            background: var(--warm-white);
-            padding: 32px 64px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            background: rgba(250, 250, 248, 0.95);
-        }
-
-        .header-content {
-            max-width: 1600px;
-            margin: 0 auto;
+            padding: 1.5rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 1.5rem;
         }
 
         .logo {
-            height: 56px;
+            height: 80px;
             width: auto;
         }
 
-        .nav {
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+            font-style: italic;
+        }
+
+        nav {
             display: flex;
-            gap: 48px;
+            gap: 2rem;
             align-items: center;
         }
 
-        .nav-link {
-            color: var(--black);
+        nav a {
+            color: var(--white);
             text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.85rem;
             font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             transition: color 0.3s ease;
-            position: relative;
         }
 
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .admin-btn {
             background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--gold-dark);
-        }
-
-        .nav-link:hover:after {
-            width: 100%;
-        }
-
-        .admin-toggle {
-            background: var(--black);
-            color: var(--warm-white);
+            color: var(--black);
+            padding: 0.5rem 1.5rem;
             border: none;
-            padding: 10px 24px;
-            font-size: 11px;
-            letter-spacing: 2px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: var(--white);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* LANDING PAGE */
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.6s ease;
+        }
+
+        .landing-page.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .landing-video {
+            max-width: 90%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            margin-bottom: 3rem;
+        }
+
+        .enter-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 1rem 3rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
+            transition: all 0.4s ease;
         }
 
-        .admin-toggle:hover {
+        .enter-btn:hover {
             background: var(--gold);
             color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201, 169, 110, 0.3);
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1600px;
+        /* MAIN CONTENT */
+        .main-content {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 80px 64px 120px;
+            padding: 4rem 3rem;
         }
 
-        /* Geometric Divider */
-        .geometric-divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 80px 0;
-            position: relative;
-        }
-
-        .geometric-divider:before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-            width: 8px;
-            height: 8px;
-            background: var(--gold);
-        }
-
-        /* Hero Section */
-        .hero {
+        /* GRID LAYOUT */
+        .auction-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 120px;
+            gap: 4rem;
             align-items: start;
         }
 
-        .hero-left {
-            position: sticky;
-            top: 140px;
+        /* LEFT COLUMN */
+        .auction-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
         }
 
-        .auction-title {
-            font-size: 13px;
-            letter-spacing: 4px;
+        .auction-number {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--mid-gray);
-            margin-bottom: 24px;
+            color: #999;
             font-weight: 400;
         }
 
         .artwork-title {
-            font-size: 64px;
-            font-weight: 300;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            color: var(--black);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
         }
 
         .artist-name {
-            font-size: 28px;
+            color: var(--gold);
+            font-size: 1.1rem;
             font-weight: 400;
-            color: var(--gold-dark);
-            margin-bottom: 48px;
+            letter-spacing: 0.5px;
         }
 
-        .curator-section {
-            background: white;
-            padding: 48px;
-            box-shadow: 
-                0 1px 3px var(--shadow-soft),
-                0 8px 24px var(--shadow-medium);
-            margin-bottom: 48px;
-            border-left: 2px solid var(--gold);
+        /* CURATOR'S NOTE */
+        .curators-note {
+            background: var(--off-white);
+            padding: 2.5rem;
+            border-left: 3px solid var(--gold);
+            box-shadow: var(--shadow-soft);
         }
 
-        .curator-label {
-            font-size: 11px;
-            letter-spacing: 3px;
+        .curators-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--gold-dark);
-            margin-bottom: 20px;
+            color: #999;
+            margin-bottom: 1rem;
             font-weight: 500;
         }
 
-        .curator-text {
-            font-size: 17px;
+        .curators-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
             line-height: 1.8;
-            color: var(--off-black);
-            font-weight: 300;
+            color: var(--black);
         }
 
-        .curator-text.editable {
-            border: 1px solid var(--gold);
-            padding: 16px;
-            outline: none;
-            min-height: 200px;
-        }
-
-        /* Artwork Display */
-        .artwork-container {
-            position: relative;
-        }
-
-        .artwork-frame {
-            background: white;
-            padding: 32px;
-            box-shadow: 
-                0 2px 8px var(--shadow-soft),
-                0 16px 48px var(--shadow-medium),
-                0 32px 64px var(--shadow-strong);
-            position: relative;
-        }
-
-        .artwork-image {
+        .edit-curator {
             width: 100%;
-            height: auto;
-            display: block;
+            min-height: 150px;
+            padding: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            border: 2px solid var(--gold);
+            background: var(--white);
+            resize: vertical;
         }
 
-        .artwork-details {
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--warm-gray);
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            font-size: 13px;
-        }
-
-        .detail-item {
+        /* BIDDING SECTION */
+        .bidding-section {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2rem;
         }
 
-        .detail-label {
-            font-size: 11px;
+        /* COUNTDOWN */
+        .countdown-container {
+            background: var(--off-white);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .countdown-label {
+            font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--mid-gray);
+            color: #999;
+            margin-bottom: 1.5rem;
+            text-align: center;
             font-weight: 500;
         }
 
-        .detail-value {
-            color: var(--black);
-            font-weight: 400;
-        }
-
-        /* Bidding Section */
-        .bidding-panel {
-            background: white;
-            padding: 48px;
-            box-shadow: 
-                0 2px 8px var(--shadow-soft),
-                0 16px 48px var(--shadow-medium);
-            margin-top: 48px;
-        }
-
-        .countdown-timer {
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--warm-gray);
         }
 
-        .timer-label {
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--mid-gray);
-            margin-bottom: 16px;
-        }
-
-        .timer-display {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-        }
-
-        .timer-unit {
+        .time-unit {
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
 
-        .timer-value {
-            font-size: 48px;
+        .time-value {
+            font-size: 2.5rem;
             font-weight: 300;
             color: var(--black);
-            line-height: 1;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .timer-unit-label {
-            font-size: 11px;
-            letter-spacing: 2px;
+        .time-label {
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--mid-gray);
-            margin-top: 8px;
+            color: #999;
+            margin-top: 0.5rem;
         }
 
-        .current-bid {
+        /* CURRENT BID */
+        .current-bid-section {
+            background: var(--off-white);
+            padding: 2rem;
             text-align: center;
-            margin-bottom: 32px;
+            box-shadow: var(--shadow-soft);
         }
 
-        .current-bid-label {
-            font-size: 13px;
+        .bid-label {
+            font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--mid-gray);
-            margin-bottom: 12px;
+            color: #999;
+            margin-bottom: 1rem;
+            font-weight: 500;
         }
 
         .current-bid-amount {
-            font-size: 56px;
+            font-size: 3rem;
             font-weight: 300;
-            color: var(--gold-dark);
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .bid-form {
+        /* BID INPUT */
+        .bid-input-section {
             display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 1rem;
         }
 
         .bid-input {
             flex: 1;
-            padding: 18px 24px;
-            font-size: 18px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
             font-family: 'Montserrat', sans-serif;
-            border: 1px solid var(--warm-gray);
-            background: var(--warm-white);
-            color: var(--black);
+            border: 2px solid var(--light-gray);
+            background: var(--white);
             transition: all 0.3s ease;
         }
 
@@ -433,275 +334,174 @@
             box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
         }
 
-        .bid-button {
-            padding: 18px 48px;
+        .place-bid-btn {
             background: var(--black);
-            color: var(--warm-white);
+            color: var(--white);
             border: none;
-            font-size: 13px;
-            letter-spacing: 3px;
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
             transition: all 0.3s ease;
         }
 
-        .bid-button:hover {
+        .place-bid-btn:hover {
             background: var(--gold);
             color: var(--black);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px var(--shadow-medium);
+            box-shadow: var(--shadow-medium);
         }
 
-        .bid-button:active {
-            transform: translateY(0);
-        }
-
+        /* BID HISTORY */
         .bid-history {
-            margin-top: 32px;
-            padding-top: 32px;
-            border-top: 1px solid var(--warm-gray);
+            background: var(--off-white);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
         }
 
-        .bid-history-title {
-            font-size: 13px;
+        .bid-history-label {
+            font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--black);
-            margin-bottom: 20px;
+            color: #999;
+            margin-bottom: 1.5rem;
             font-weight: 500;
-        }
-
-        .bid-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 240px;
-            overflow-y: auto;
         }
 
         .bid-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-            background: var(--warm-white);
-            border-left: 2px solid var(--gold);
-            font-size: 14px;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
         }
 
-        .bid-amount-small {
+        .bid-item:last-child {
+            border-bottom: none;
+        }
+
+        .bid-amount {
+            color: var(--gold);
             font-weight: 500;
-            color: var(--gold-dark);
         }
 
         .bid-time {
-            font-size: 12px;
-            color: var(--mid-gray);
+            color: #999;
+            font-size: 0.9rem;
         }
 
-        /* Admin Section */
-        .admin-panel {
-            background: var(--off-black);
-            color: var(--warm-white);
-            padding: 48px;
-            margin-top: 80px;
-            box-shadow: 
-                0 2px 8px var(--shadow-soft),
-                0 16px 48px var(--shadow-strong);
+        /* RIGHT COLUMN - ARTWORK */
+        .artwork-display {
+            position: sticky;
+            top: 140px;
         }
 
-        .admin-title {
-            font-size: 24px;
-            letter-spacing: 3px;
+        .artwork-card {
+            background: var(--white);
+            padding: 3rem;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .artwork-frame {
+            background: var(--off-white);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .artwork-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 32px;
-            color: var(--gold);
+            color: #999;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: var(--black);
             font-weight: 400;
         }
 
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-        }
-
-        .admin-field {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .admin-label {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
+        /* ADMIN INPUTS */
         .admin-input {
-            padding: 14px 18px;
-            background: var(--black);
-            border: 1px solid rgba(201, 169, 110, 0.3);
-            color: var(--warm-white);
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            background: var(--white);
         }
 
         .admin-input:focus {
             outline: none;
-            border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
         }
 
-        .admin-textarea {
-            min-height: 150px;
-            resize: vertical;
-            font-family: 'Montserrat', sans-serif;
+        /* IMAGE UPLOAD */
+        .image-upload-section {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--off-white);
+            border: 2px dashed var(--gold);
         }
 
-        .admin-button {
-            grid-column: 1 / -1;
-            padding: 18px;
-            background: var(--gold);
-            color: var(--black);
-            border: none;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 16px;
-        }
-
-        .admin-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201, 169, 110, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--black);
-            color: var(--warm-white);
-            padding: 80px 64px 48px;
-            margin-top: 120px;
-        }
-
-        .footer-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 48px;
-        }
-
-        .footer-about {
-            max-width: 400px;
-        }
-
-        .footer-logo {
-            height: 48px;
-            margin-bottom: 24px;
-        }
-
-        .footer-text {
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--warm-gray);
-            font-weight: 300;
-        }
-
-        .footer-section-title {
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .footer-link {
-            color: var(--warm-gray);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--gold);
-        }
-
-        .footer-bottom {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .image-upload-label {
+            display: block;
             text-align: center;
-            font-size: 12px;
-            color: var(--mid-gray);
-            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--black);
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero {
+        input[type="file"] {
+            display: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .auction-grid {
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 3rem;
             }
 
-            .hero-left {
+            .artwork-display {
                 position: static;
             }
 
-            .admin-grid {
-                grid-template-columns: 1fr;
+            .landing-video {
+                max-width: 95%;
+                max-height: 70vh;
             }
 
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 24px 32px;
+            .logo {
+                height: 60px;
             }
 
-            .container {
-                padding: 48px 32px 80px;
-            }
-
-            .artwork-title {
-                font-size: 42px;
-            }
-
-            .nav {
-                gap: 24px;
-            }
-
-            .timer-display {
-                gap: 16px;
-            }
-
-            .timer-value {
-                font-size: 32px;
-            }
-
-            .current-bid-amount {
-                font-size: 42px;
+            .tagline {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -712,58 +512,45 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        function CalixMaisonApp() {
+        function CalixMaison() {
             const [showLanding, setShowLanding] = useState(true);
-            const [showAdmin, setShowAdmin] = useState(false);
-            const [currentBid, setCurrentBid] = useState(5000);
-            const [bidAmount, setBidAmount] = useState('');
-            const [bidHistory, setBidHistory] = useState([
-                { amount: 5000, time: '2 hours ago', bidder: 'Collector #847' },
-                { amount: 4500, time: '5 hours ago', bidder: 'Collector #231' },
-                { amount: 4000, time: '1 day ago', bidder: 'Collector #612' },
-            ]);
-
+            const [adminMode, setAdminMode] = useState(false);
+            
+            // Auction data state
             const [auctionData, setAuctionData] = useState({
-                artworkTitle: 'Convergence in Monochrome',
-                artistName: 'Elena Rousseau',
+                auctionNumber: 'WEEKLY CURATED AUCTION NO. 001',
+                title: 'Convergence in Monochrome',
+                artist: 'Elena Rousseau',
+                curatorNote: "In Rousseau's latest work, we encounter a meditation on the space between intention and gesture. The layered monochromatic planes speak to a deliberate restraint—each mark considered, each absence as vital as presence. This piece emerged from her residency in Kyoto, where the philosophy of ma (間), the conscious use of negative space, profoundly influenced her practice. Here, Western gestural abstraction meets Eastern spatial consciousness, resulting in a work that breathes with quiet authority. The surface reveals itself slowly: what first appears as austere minimalism gradually unveils a complex topography of subtle tonalities and textures. It is this patience, this refusal to seduce immediately, that marks Rousseau as one of the most compelling voices in contemporary abstraction.",
                 year: '2024',
                 medium: 'Oil and graphite on canvas',
                 dimensions: '48 × 36 inches',
                 edition: 'Unique work',
-                curatorText: 'In Rousseau\'s latest work, we encounter a meditation on the space between intention and gesture. The layered monochromatic planes speak to a deliberate restraint—each mark considered, each absence as vital as presence. This piece emerged from her residency in Kyoto, where the philosophy of ma (間), the conscious use of negative space, profoundly influenced her practice. Here, Western gestural abstraction meets Eastern spatial consciousness, resulting in a work that breathes with quiet authority. The surface reveals itself slowly: what first appears as austere minimalism gradually unveils a complex topography of subtle tonalities and textures. It is this patience, this refusal to seduce immediately, that marks Rousseau as one of the most compelling voices in contemporary abstraction.',
-                endDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000 + 32 * 60 * 1000),
+                currentBid: 5000,
+                bidHistory: [
+                    { amount: 5000, time: '2 hours ago' },
+                    { amount: 4500, time: '5 hours ago' },
+                    { amount: 4000, time: '1 day ago' }
+                ],
+                imageUrl: 'https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&q=80',
+                endDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000) // 5 days, 14 hours from now
             });
 
-            const [timeLeft, setTimeLeft] = useState({
-                days: 0,
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-            });
+            const [newBid, setNewBid] = useState('');
+            const [timeLeft, setTimeLeft] = useState({});
 
-            const [adminForm, setAdminForm] = useState({
-                artworkTitle: auctionData.artworkTitle,
-                artistName: auctionData.artistName,
-                year: auctionData.year,
-                medium: auctionData.medium,
-                dimensions: auctionData.dimensions,
-                edition: auctionData.edition,
-                curatorText: auctionData.curatorText,
-            });
-
+            // Countdown timer
             useEffect(() => {
                 const timer = setInterval(() => {
                     const now = new Date().getTime();
                     const distance = auctionData.endDate - now;
 
-                    if (distance > 0) {
-                        setTimeLeft({
-                            days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-                            hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                            minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-                            seconds: Math.floor((distance % (1000 * 60)) / 1000),
-                        });
-                    }
+                    setTimeLeft({
+                        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+                    });
                 }, 1000);
 
                 return () => clearInterval(timer);
@@ -774,287 +561,259 @@
             };
 
             const handlePlaceBid = () => {
-                const bid = parseFloat(bidAmount);
-                if (bid > currentBid) {
-                    const newBid = {
-                        amount: bid,
-                        time: 'Just now',
-                        bidder: 'You',
-                    };
-                    setBidHistory([newBid, ...bidHistory]);
-                    setCurrentBid(bid);
-                    setBidAmount('');
-                } else {
-                    alert('Bid must be higher than current bid');
+                const bidAmount = parseFloat(newBid);
+                if (bidAmount > auctionData.currentBid) {
+                    const newBidHistory = [
+                        { amount: bidAmount, time: 'Just now' },
+                        ...auctionData.bidHistory
+                    ];
+                    setAuctionData({
+                        ...auctionData,
+                        currentBid: bidAmount,
+                        bidHistory: newBidHistory
+                    });
+                    setNewBid('');
                 }
             };
 
-            const handleAdminUpdate = () => {
-                setAuctionData({
-                    ...auctionData,
-                    ...adminForm,
-                });
-                alert('Auction details updated successfully');
+            const handleImageUpload = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setAuctionData({ ...auctionData, imageUrl: reader.result });
+                    };
+                    reader.readAsDataURL(file);
+                }
             };
 
             return (
                 <>
-                    {/* Landing Page */}
-                    <div className={`landing-page ${!showLanding ? 'hidden' : ''}`}>
-                        <div className="landing-video-container">
-                            <video 
-                                className="landing-video"
-                                autoPlay 
-                                loop 
-                                muted 
-                                playsInline
-                            >
-                                <source src="assets/Calix_Maison_Symmetric.mp4" type="video/mp4" />
-                            </video>
-                            <button className="enter-button" onClick={handleEnter}>
-                                Enter Calix Maison
-                            </button>
-                        </div>
+                    {/* LANDING PAGE */}
+                    <div className={`landing-page ${!showLanding ? 'fade-out' : ''}`}>
+                        <video className="landing-video" autoPlay loop muted playsInline>
+                            <source src="assets/Calix_Maison_Symmetric.mp4" type="video/mp4" />
+                        </video>
+                        <button className="enter-btn" onClick={handleEnter}>
+                            Enter Maison
+                        </button>
                     </div>
 
-                    {/* Main Site */}
-                    <div style={{ opacity: showLanding ? 0 : 1, transition: 'opacity 0.8s ease 0.3s' }}>
-                        {/* Header */}
-                        <header className="header">
-                            <div className="header-content">
-                                <div className="logo-container">
-                                    <img src="assets/CALIXMAISON.png" alt="Calix Maison" className="logo" />
-                                </div>
-                                <nav className="nav">
-                                    <a href="#" className="nav-link">Current Auction</a>
-                                    <a href="#" className="nav-link">Archive</a>
-                                    <a href="#" className="nav-link">About</a>
-                                    <button className="admin-toggle" onClick={() => setShowAdmin(!showAdmin)}>
-                                        {showAdmin ? 'Close Admin' : 'Admin'}
-                                    </button>
-                                </nav>
-                            </div>
-                        </header>
+                    {/* MAIN SITE */}
+                    <header>
+                        <div className="logo-container">
+                            <img src="assets/CALIXMAISON.png" alt="Calix Maison" className="logo" />
+                            <div className="tagline">The House of Grails</div>
+                        </div>
+                        <nav>
+                            <a href="#current">Current Auction</a>
+                            <a href="#archive">Archive</a>
+                            <a href="#about">About</a>
+                            <button className="admin-btn" onClick={() => setAdminMode(!adminMode)}>
+                                Admin
+                            </button>
+                        </nav>
+                    </header>
 
-                        {/* Main Content */}
-                        <main className="container">
-                            <div className="hero">
-                                {/* Left Column - Info & Curator */}
-                                <div className="hero-left">
-                                    <div className="auction-title">Weekly Curated Auction No. 001</div>
-                                    <h1 className="artwork-title serif">{auctionData.artworkTitle}</h1>
-                                    <h2 className="artist-name">{auctionData.artistName}</h2>
-
-                                    {/* Curator's Note */}
-                                    <div className="curator-section">
-                                        <div className="curator-label">Curator's Note</div>
-                                        <div className="curator-text serif">
-                                            {auctionData.curatorText}
-                                        </div>
-                                    </div>
-
-                                    {/* Bidding Panel */}
-                                    <div className="bidding-panel">
-                                        {/* Countdown Timer */}
-                                        <div className="countdown-timer">
-                                            <div className="timer-label">Auction Ends In</div>
-                                            <div className="timer-display">
-                                                <div className="timer-unit">
-                                                    <div className="timer-value">{String(timeLeft.days).padStart(2, '0')}</div>
-                                                    <div className="timer-unit-label">Days</div>
-                                                </div>
-                                                <div className="timer-unit">
-                                                    <div className="timer-value">{String(timeLeft.hours).padStart(2, '0')}</div>
-                                                    <div className="timer-unit-label">Hours</div>
-                                                </div>
-                                                <div className="timer-unit">
-                                                    <div className="timer-value">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                                                    <div className="timer-unit-label">Min</div>
-                                                </div>
-                                                <div className="timer-unit">
-                                                    <div className="timer-value">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                                                    <div className="timer-unit-label">Sec</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Current Bid */}
-                                        <div className="current-bid">
-                                            <div className="current-bid-label">Current Bid</div>
-                                            <div className="current-bid-amount">${currentBid.toLocaleString()}</div>
-                                        </div>
-
-                                        {/* Bid Form */}
-                                        <div className="bid-form">
-                                            <input 
-                                                type="number" 
-                                                className="bid-input"
-                                                placeholder="Enter your bid"
-                                                value={bidAmount}
-                                                onChange={(e) => setBidAmount(e.target.value)}
-                                            />
-                                            <button className="bid-button" onClick={handlePlaceBid}>
-                                                Place Bid
-                                            </button>
-                                        </div>
-
-                                        {/* Bid History */}
-                                        <div className="bid-history">
-                                            <div className="bid-history-title">Recent Bids</div>
-                                            <div className="bid-list">
-                                                {bidHistory.map((bid, index) => (
-                                                    <div key={index} className="bid-item">
-                                                        <span className="bid-amount-small">${bid.amount.toLocaleString()}</span>
-                                                        <span className="bid-time">{bid.time}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Right Column - Artwork */}
-                                <div className="artwork-container">
-                                    <div className="artwork-frame">
-                                        <img 
-                                            src="data:image/svg+xml,%3Csvg width='800' height='1067' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f5f5f3;stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:%23e8e6e3;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23d8d6d3;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='1067' fill='url(%23grad1)'/%3E%3Crect x='100' y='150' width='600' height='400' fill='%231a1a1a' opacity='0.9'/%3E%3Crect x='150' y='600' width='500' height='300' fill='%232a2a2a' opacity='0.7'/%3E%3Cline x1='0' y1='533' x2='800' y2='533' stroke='%230a0a0a' stroke-width='2' opacity='0.3'/%3E%3Cline x1='400' y1='0' x2='400' y2='1067' stroke='%230a0a0a' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E"
-                                            alt={auctionData.artworkTitle}
-                                            className="artwork-image"
+                    <main className="main-content">
+                        <div className="auction-grid">
+                            {/* LEFT COLUMN */}
+                            <div className="auction-info">
+                                <div>
+                                    {adminMode ? (
+                                        <input
+                                            type="text"
+                                            className="admin-input"
+                                            value={auctionData.auctionNumber}
+                                            onChange={(e) => setAuctionData({ ...auctionData, auctionNumber: e.target.value })}
+                                            placeholder="Auction Number"
                                         />
-                                        <div className="artwork-details">
-                                            <div className="detail-item">
-                                                <span className="detail-label">Year</span>
-                                                <span className="detail-value">{auctionData.year}</span>
+                                    ) : (
+                                        <div className="auction-number">{auctionData.auctionNumber}</div>
+                                    )}
+                                    
+                                    {adminMode ? (
+                                        <input
+                                            type="text"
+                                            className="admin-input"
+                                            value={auctionData.title}
+                                            onChange={(e) => setAuctionData({ ...auctionData, title: e.target.value })}
+                                            placeholder="Artwork Title"
+                                        />
+                                    ) : (
+                                        <h1 className="artwork-title">{auctionData.title}</h1>
+                                    )}
+                                    
+                                    {adminMode ? (
+                                        <input
+                                            type="text"
+                                            className="admin-input"
+                                            value={auctionData.artist}
+                                            onChange={(e) => setAuctionData({ ...auctionData, artist: e.target.value })}
+                                            placeholder="Artist Name"
+                                        />
+                                    ) : (
+                                        <div className="artist-name">{auctionData.artist}</div>
+                                    )}
+                                </div>
+
+                                {/* CURATOR'S NOTE */}
+                                <div className="curators-note">
+                                    <div className="curators-label">Curator's Note</div>
+                                    {adminMode ? (
+                                        <textarea
+                                            className="edit-curator"
+                                            value={auctionData.curatorNote}
+                                            onChange={(e) => setAuctionData({ ...auctionData, curatorNote: e.target.value })}
+                                        />
+                                    ) : (
+                                        <p className="curators-text">{auctionData.curatorNote}</p>
+                                    )}
+                                </div>
+
+                                {/* BIDDING SECTION */}
+                                <div className="bidding-section">
+                                    {/* COUNTDOWN */}
+                                    <div className="countdown-container">
+                                        <div className="countdown-label">Auction Ends In</div>
+                                        <div className="countdown">
+                                            <div className="time-unit">
+                                                <div className="time-value">{timeLeft.days || '00'}</div>
+                                                <div className="time-label">Days</div>
                                             </div>
-                                            <div className="detail-item">
-                                                <span className="detail-label">Medium</span>
-                                                <span className="detail-value">{auctionData.medium}</span>
+                                            <div className="time-unit">
+                                                <div className="time-value">{timeLeft.hours || '00'}</div>
+                                                <div className="time-label">Hours</div>
                                             </div>
-                                            <div className="detail-item">
-                                                <span className="detail-label">Dimensions</span>
-                                                <span className="detail-value">{auctionData.dimensions}</span>
+                                            <div className="time-unit">
+                                                <div className="time-value">{timeLeft.minutes || '00'}</div>
+                                                <div className="time-label">Min</div>
                                             </div>
-                                            <div className="detail-item">
-                                                <span className="detail-label">Edition</span>
-                                                <span className="detail-value">{auctionData.edition}</span>
+                                            <div className="time-unit">
+                                                <div className="time-value">{timeLeft.seconds || '00'}</div>
+                                                <div className="time-label">Sec</div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            {/* Admin Panel */}
-                            {showAdmin && (
-                                <div className="admin-panel">
-                                    <h2 className="admin-title">Admin Panel</h2>
-                                    <div className="admin-grid">
-                                        <div className="admin-field">
-                                            <label className="admin-label">Artwork Title</label>
-                                            <input 
-                                                type="text" 
-                                                className="admin-input"
-                                                value={adminForm.artworkTitle}
-                                                onChange={(e) => setAdminForm({...adminForm, artworkTitle: e.target.value})}
-                                            />
+                                    {/* CURRENT BID */}
+                                    <div className="current-bid-section">
+                                        <div className="bid-label">Current Bid</div>
+                                        <div className="current-bid-amount">
+                                            ${auctionData.currentBid.toLocaleString()}
                                         </div>
-                                        <div className="admin-field">
-                                            <label className="admin-label">Artist Name</label>
-                                            <input 
-                                                type="text" 
-                                                className="admin-input"
-                                                value={adminForm.artistName}
-                                                onChange={(e) => setAdminForm({...adminForm, artistName: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className="admin-field">
-                                            <label className="admin-label">Year</label>
-                                            <input 
-                                                type="text" 
-                                                className="admin-input"
-                                                value={adminForm.year}
-                                                onChange={(e) => setAdminForm({...adminForm, year: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className="admin-field">
-                                            <label className="admin-label">Medium</label>
-                                            <input 
-                                                type="text" 
-                                                className="admin-input"
-                                                value={adminForm.medium}
-                                                onChange={(e) => setAdminForm({...adminForm, medium: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className="admin-field">
-                                            <label className="admin-label">Dimensions</label>
-                                            <input 
-                                                type="text" 
-                                                className="admin-input"
-                                                value={adminForm.dimensions}
-                                                onChange={(e) => setAdminForm({...adminForm, dimensions: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className="admin-field">
-                                            <label className="admin-label">Edition</label>
-                                            <input 
-                                                type="text" 
-                                                className="admin-input"
-                                                value={adminForm.edition}
-                                                onChange={(e) => setAdminForm({...adminForm, edition: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className="admin-field" style={{gridColumn: '1 / -1'}}>
-                                            <label className="admin-label">Curator's Text</label>
-                                            <textarea 
-                                                className="admin-input admin-textarea"
-                                                value={adminForm.curatorText}
-                                                onChange={(e) => setAdminForm({...adminForm, curatorText: e.target.value})}
-                                            />
-                                        </div>
-                                        <button className="admin-button" onClick={handleAdminUpdate}>
-                                            Update Auction
+                                    </div>
+
+                                    {/* BID INPUT */}
+                                    <div className="bid-input-section">
+                                        <input
+                                            type="number"
+                                            className="bid-input"
+                                            placeholder="Enter your bid"
+                                            value={newBid}
+                                            onChange={(e) => setNewBid(e.target.value)}
+                                        />
+                                        <button className="place-bid-btn" onClick={handlePlaceBid}>
+                                            Place Bid
                                         </button>
                                     </div>
-                                </div>
-                            )}
-                        </main>
 
-                        {/* Footer */}
-                        <footer className="footer">
-                            <div className="footer-content">
-                                <div className="footer-about">
-                                    <img src="assets/CALIXMAISON.png" alt="Calix Maison" className="footer-logo" />
-                                    <p className="footer-text serif">
-                                        Calix Maison presents weekly curated art auctions, championing singular voices in contemporary practice. Each piece is selected for its contribution to the ongoing dialogue between tradition and innovation.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 className="footer-section-title">Navigate</h3>
-                                    <div className="footer-links">
-                                        <a href="#" className="footer-link">Current Auction</a>
-                                        <a href="#" className="footer-link">Past Auctions</a>
-                                        <a href="#" className="footer-link">How It Works</a>
-                                        <a href="#" className="footer-link">Contact</a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="footer-section-title">Connect</h3>
-                                    <div className="footer-links">
-                                        <a href="#" className="footer-link">Instagram</a>
-                                        <a href="#" className="footer-link">Twitter</a>
-                                        <a href="#" className="footer-link">Newsletter</a>
+                                    {/* BID HISTORY */}
+                                    <div className="bid-history">
+                                        <div className="bid-history-label">Recent Bids</div>
+                                        {auctionData.bidHistory.map((bid, index) => (
+                                            <div key={index} className="bid-item">
+                                                <span className="bid-amount">${bid.amount.toLocaleString()}</span>
+                                                <span className="bid-time">{bid.time}</span>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
-                            <div className="footer-bottom">
-                                © 2024 Calix Maison. All rights reserved.
+
+                            {/* RIGHT COLUMN - ARTWORK */}
+                            <div className="artwork-display">
+                                <div className="artwork-card">
+                                    <div className="artwork-frame">
+                                        <img 
+                                            src={auctionData.imageUrl} 
+                                            alt={auctionData.title}
+                                            className="artwork-image"
+                                        />
+                                    </div>
+                                    
+                                    {adminMode && (
+                                        <div className="image-upload-section">
+                                            <label className="image-upload-label">
+                                                Click to upload artwork image
+                                                <input type="file" accept="image/*" onChange={handleImageUpload} />
+                                            </label>
+                                        </div>
+                                    )}
+
+                                    <div className="artwork-details">
+                                        <div className="detail-item">
+                                            <div className="detail-label">Year</div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="admin-input"
+                                                    value={auctionData.year}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, year: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="detail-value">{auctionData.year}</div>
+                                            )}
+                                        </div>
+                                        <div className="detail-item">
+                                            <div className="detail-label">Medium</div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="admin-input"
+                                                    value={auctionData.medium}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, medium: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="detail-value">{auctionData.medium}</div>
+                                            )}
+                                        </div>
+                                        <div className="detail-item">
+                                            <div className="detail-label">Dimensions</div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="admin-input"
+                                                    value={auctionData.dimensions}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, dimensions: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="detail-value">{auctionData.dimensions}</div>
+                                            )}
+                                        </div>
+                                        <div className="detail-item">
+                                            <div className="detail-label">Edition</div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="admin-input"
+                                                    value={auctionData.edition}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, edition: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="detail-value">{auctionData.edition}</div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </footer>
-                    </div>
+                        </div>
+                    </main>
                 </>
             );
         }
 
-        ReactDOM.render(<CalixMaisonApp />, document.getElementById('root'));
+        ReactDOM.render(<CalixMaison />, document.getElementById('root'));
     </script>
 </body>
 </html>
