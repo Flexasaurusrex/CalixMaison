@@ -5,508 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calix Maison - The House of Grails</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#C9A96E',
+                        'off-white': '#f5f5f3',
+                        'light-gray': '#e8e8e6',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --gold: #C9A96E;
-            --black: #1a1a1a;
-            --white: #fafaf8;
-            --off-white: #f5f5f3;
-            --light-gray: #e8e8e6;
-            --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
-            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.12);
-        }
-
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-        }
-
-        /* HEADER */
-        header {
-            background: var(--black);
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow-medium);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .logo {
-            height: 80px;
-            width: auto;
-        }
-
-        .tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: var(--gold);
-            letter-spacing: 0.5px;
-            font-style: italic;
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--gold);
-        }
-
-        .admin-btn {
-            background: var(--gold);
-            color: var(--black);
-            padding: 0.5rem 1.5rem;
-            border: none;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .admin-btn:hover {
-            background: var(--white);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        /* LANDING PAGE */
-        .landing-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.6s ease;
-        }
-
-        .landing-page.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .landing-video {
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            margin-bottom: 3rem;
-            display: block;
-        }
-
-        .enter-btn {
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            padding: 1rem 3rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
-
-        .enter-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201, 169, 110, 0.3);
-        }
-
-        /* MAIN CONTENT */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 3rem;
-        }
-
-        /* GRID LAYOUT */
-        .auction-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        /* LEFT COLUMN */
-        .auction-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .auction-number {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-            font-weight: 400;
-        }
-
-        .artwork-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .artist-name {
-            color: var(--gold);
-            font-size: 1.1rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        /* CURATOR'S NOTE */
-        .curators-note {
-            background: var(--off-white);
-            padding: 2.5rem;
-            border-left: 3px solid var(--gold);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .curators-label {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .curators-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--black);
-        }
-
-        .edit-curator {
-            width: 100%;
-            min-height: 150px;
-            padding: 1.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            border: 2px solid var(--gold);
-            background: var(--white);
-            resize: vertical;
-        }
-
-        /* BIDDING SECTION */
-        .bidding-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        /* COUNTDOWN */
-        .countdown-container {
-            background: var(--off-white);
-            padding: 2rem;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .countdown-label {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            text-align: center;
-        }
-
-        .time-unit {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .time-value {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--black);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .time-label {
-            font-size: 0.7rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #999;
-            margin-top: 0.5rem;
-        }
-
-        /* CURRENT BID */
-        .current-bid-section {
-            background: var(--off-white);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .bid-label {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .current-bid-amount {
-            font-size: 3rem;
-            font-weight: 300;
-            color: var(--gold);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* BID INPUT */
-        .bid-input-section {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .bid-input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            border: 2px solid var(--light-gray);
-            background: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        .bid-input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
-        }
-
-        .place-bid-btn {
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            padding: 1rem 2.5rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .place-bid-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        /* BID HISTORY */
-        .bid-history {
-            background: var(--off-white);
-            padding: 2rem;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .bid-history-label {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .bid-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .bid-item:last-child {
-            border-bottom: none;
-        }
-
-        .bid-amount {
-            color: var(--gold);
-            font-weight: 500;
-        }
-
-        .bid-time {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        /* RIGHT COLUMN - ARTWORK */
-        .artwork-display {
-            position: sticky;
-            top: 140px;
-        }
-
-        .artwork-card {
-            background: var(--white);
-            padding: 3rem;
-            box-shadow: var(--shadow-strong);
-        }
-
-        .artwork-frame {
-            background: var(--off-white);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
-            margin-bottom: 2rem;
-        }
-
-        .artwork-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            box-shadow: var(--shadow-medium);
-        }
-
-        .artwork-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .detail-label {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-            font-weight: 500;
-        }
-
-        .detail-value {
-            color: var(--black);
-            font-weight: 400;
-        }
-
-        /* ADMIN INPUTS */
-        .admin-input {
-            width: 100%;
-            padding: 0.75rem;
-            margin-top: 0.5rem;
-            font-family: 'Montserrat', sans-serif;
-            border: 2px solid var(--gold);
-            background: var(--white);
-        }
-
-        .admin-input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
-        }
-
-        /* IMAGE UPLOAD */
-        .image-upload-section {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: var(--off-white);
-            border: 2px dashed var(--gold);
-        }
-
-        .image-upload-label {
-            display: block;
-            text-align: center;
-            cursor: pointer;
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: var(--black);
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 968px) {
-            .auction-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .artwork-display {
-                position: static;
-            }
-
-            .landing-video {
-                max-width: 95%;
-                max-height: 70vh;
-            }
-
-            .logo {
-                height: 60px;
-            }
-
-            .tagline {
-                font-size: 1.2rem;
-            }
         }
     </style>
 </head>
-<body>
+<body class="bg-white text-gray-900">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -533,7 +59,7 @@
                     { amount: 4000, time: '1 day ago' }
                 ],
                 imageUrl: 'https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?w=1200&q=80',
-                endDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000) // 5 days, 14 hours from now
+                endDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000)
             });
 
             const [newBid, setNewBid] = useState('');
@@ -590,218 +116,294 @@
             return (
                 <>
                     {/* LANDING PAGE */}
-                    <div className={`landing-page ${!showLanding ? 'fade-out' : ''}`}>
-                        <video className="landing-video" autoPlay loop muted playsInline>
+                    <div className={`fixed inset-0 bg-black flex flex-col justify-center items-center z-50 transition-opacity duration-600 ${!showLanding ? 'opacity-0 pointer-events-none' : ''}`}>
+                        <video 
+                            className="w-full max-w-7xl h-auto mb-8 md:mb-12 px-4" 
+                            autoPlay 
+                            loop 
+                            muted 
+                            playsInline
+                        >
                             <source src="assets/Calix_Maison_Symmetric.mp4" type="video/mp4" />
                         </video>
-                        <button className="enter-btn" onClick={handleEnter}>
+                        <button 
+                            className="bg-transparent text-gold border-2 border-gold px-8 md:px-12 py-3 md:py-4 font-sans text-xs md:text-sm font-medium tracking-[3px] uppercase transition-all duration-400 hover:bg-gold hover:text-black hover:-translate-y-0.5 hover:shadow-2xl"
+                            onClick={handleEnter}
+                        >
                             Enter Maison
                         </button>
                     </div>
 
-                    {/* MAIN SITE */}
-                    <header>
-                        <div className="logo-container">
-                            <img src="assets/CALIXMAISON.png" alt="Calix Maison" className="logo" />
-                            <div className="tagline">The House of Grails</div>
+                    {/* HEADER */}
+                    <header className="bg-gray-900 px-4 md:px-6 lg:px-12 py-4 md:py-6 sticky top-0 z-40 shadow-lg">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+                            <div className="flex items-center gap-3 md:gap-6">
+                                <img src="assets/CALIXMAISON.png" alt="Calix Maison" className="h-16 md:h-20 lg:h-24 w-auto" />
+                                <div className="font-serif text-lg md:text-xl lg:text-2xl font-light text-gold tracking-wide italic">
+                                    The House of Grails
+                                </div>
+                            </div>
+                            <nav className="flex gap-4 md:gap-6 lg:gap-8 items-center flex-wrap justify-center">
+                                <a href="#current" className="text-white text-[10px] md:text-xs font-normal tracking-widest uppercase transition-colors hover:text-gold">
+                                    Current Auction
+                                </a>
+                                <a href="#archive" className="text-white text-[10px] md:text-xs font-normal tracking-widest uppercase transition-colors hover:text-gold">
+                                    Archive
+                                </a>
+                                <a href="#about" className="text-white text-[10px] md:text-xs font-normal tracking-widest uppercase transition-colors hover:text-gold">
+                                    About
+                                </a>
+                                <button 
+                                    className="bg-gold text-black px-4 md:px-6 py-2 md:py-2.5 font-sans text-[10px] md:text-xs font-medium tracking-widest uppercase transition-all hover:bg-white hover:-translate-y-0.5 hover:shadow-md"
+                                    onClick={() => setAdminMode(!adminMode)}
+                                >
+                                    Admin
+                                </button>
+                            </nav>
                         </div>
-                        <nav>
-                            <a href="#current">Current Auction</a>
-                            <a href="#archive">Archive</a>
-                            <a href="#about">About</a>
-                            <button className="admin-btn" onClick={() => setAdminMode(!adminMode)}>
-                                Admin
-                            </button>
-                        </nav>
                     </header>
 
-                    <main className="main-content">
-                        <div className="auction-grid">
+                    {/* MAIN CONTENT */}
+                    <main className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 py-8 md:py-12 lg:py-16">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                             {/* LEFT COLUMN */}
-                            <div className="auction-info">
+                            <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+                                {/* TITLE SECTION */}
                                 <div>
                                     {adminMode ? (
                                         <input
                                             type="text"
-                                            className="admin-input"
+                                            className="w-full p-3 mt-2 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg text-sm"
                                             value={auctionData.auctionNumber}
                                             onChange={(e) => setAuctionData({ ...auctionData, auctionNumber: e.target.value })}
                                             placeholder="Auction Number"
                                         />
                                     ) : (
-                                        <div className="auction-number">{auctionData.auctionNumber}</div>
+                                        <div className="text-xs tracking-[2px] uppercase text-gray-400 font-normal mb-3">
+                                            {auctionData.auctionNumber}
+                                        </div>
                                     )}
                                     
                                     {adminMode ? (
                                         <input
                                             type="text"
-                                            className="admin-input"
+                                            className="w-full p-3 mt-2 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg text-2xl md:text-3xl"
                                             value={auctionData.title}
                                             onChange={(e) => setAuctionData({ ...auctionData, title: e.target.value })}
                                             placeholder="Artwork Title"
                                         />
                                     ) : (
-                                        <h1 className="artwork-title">{auctionData.title}</h1>
+                                        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2">
+                                            {auctionData.title}
+                                        </h1>
                                     )}
                                     
                                     {adminMode ? (
                                         <input
                                             type="text"
-                                            className="admin-input"
+                                            className="w-full p-3 mt-2 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
                                             value={auctionData.artist}
                                             onChange={(e) => setAuctionData({ ...auctionData, artist: e.target.value })}
                                             placeholder="Artist Name"
                                         />
                                     ) : (
-                                        <div className="artist-name">{auctionData.artist}</div>
+                                        <div className="text-gold text-base md:text-lg font-normal tracking-wide">
+                                            {auctionData.artist}
+                                        </div>
                                     )}
                                 </div>
 
                                 {/* CURATOR'S NOTE */}
-                                <div className="curators-note">
-                                    <div className="curators-label">Curator's Note</div>
+                                <div className="bg-off-white p-6 md:p-8 lg:p-10 border-l-4 border-gold shadow-sm">
+                                    <div className="text-[10px] md:text-xs tracking-[2px] uppercase text-gray-400 mb-4 font-medium">
+                                        Curator's Note
+                                    </div>
                                     {adminMode ? (
                                         <textarea
-                                            className="edit-curator"
+                                            className="w-full min-h-[150px] md:min-h-[200px] p-4 font-serif text-base md:text-lg leading-relaxed border-2 border-gold bg-white resize-vertical focus:outline-none focus:shadow-lg"
                                             value={auctionData.curatorNote}
                                             onChange={(e) => setAuctionData({ ...auctionData, curatorNote: e.target.value })}
                                         />
                                     ) : (
-                                        <p className="curators-text">{auctionData.curatorNote}</p>
+                                        <p className="font-serif text-base md:text-lg leading-relaxed text-gray-900">
+                                            {auctionData.curatorNote}
+                                        </p>
                                     )}
                                 </div>
 
-                                {/* BIDDING SECTION */}
-                                <div className="bidding-section">
-                                    {/* COUNTDOWN */}
-                                    <div className="countdown-container">
-                                        <div className="countdown-label">Auction Ends In</div>
-                                        <div className="countdown">
-                                            <div className="time-unit">
-                                                <div className="time-value">{timeLeft.days || '00'}</div>
-                                                <div className="time-label">Days</div>
+                                {/* COUNTDOWN */}
+                                <div className="bg-off-white p-6 md:p-8 shadow-sm">
+                                    <div className="text-[10px] md:text-xs tracking-[2px] uppercase text-gray-400 mb-6 text-center font-medium">
+                                        Auction Ends In
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-3 md:gap-4 text-center">
+                                        <div>
+                                            <div className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">
+                                                {timeLeft.days || '00'}
                                             </div>
-                                            <div className="time-unit">
-                                                <div className="time-value">{timeLeft.hours || '00'}</div>
-                                                <div className="time-label">Hours</div>
+                                            <div className="text-[10px] tracking-widest uppercase text-gray-400 mt-2">
+                                                Days
                                             </div>
-                                            <div className="time-unit">
-                                                <div className="time-value">{timeLeft.minutes || '00'}</div>
-                                                <div className="time-label">Min</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">
+                                                {timeLeft.hours || '00'}
                                             </div>
-                                            <div className="time-unit">
-                                                <div className="time-value">{timeLeft.seconds || '00'}</div>
-                                                <div className="time-label">Sec</div>
+                                            <div className="text-[10px] tracking-widest uppercase text-gray-400 mt-2">
+                                                Hours
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">
+                                                {timeLeft.minutes || '00'}
+                                            </div>
+                                            <div className="text-[10px] tracking-widest uppercase text-gray-400 mt-2">
+                                                Min
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">
+                                                {timeLeft.seconds || '00'}
+                                            </div>
+                                            <div className="text-[10px] tracking-widest uppercase text-gray-400 mt-2">
+                                                Sec
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    {/* CURRENT BID */}
-                                    <div className="current-bid-section">
-                                        <div className="bid-label">Current Bid</div>
-                                        <div className="current-bid-amount">
-                                            ${auctionData.currentBid.toLocaleString()}
+                                {/* CURRENT BID */}
+                                <div className="bg-off-white p-6 md:p-8 text-center shadow-sm">
+                                    <div className="text-[10px] md:text-xs tracking-[2px] uppercase text-gray-400 mb-4 font-medium">
+                                        Current Bid
+                                    </div>
+                                    <div className="text-4xl md:text-5xl lg:text-6xl font-light text-gold">
+                                        ${auctionData.currentBid.toLocaleString()}
+                                    </div>
+                                </div>
+
+                                {/* BID INPUT */}
+                                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                                    <input
+                                        type="number"
+                                        className="flex-1 p-3 md:p-4 text-base font-sans border-2 border-light-gray bg-white transition-all focus:outline-none focus:border-gold focus:shadow-lg"
+                                        placeholder="Enter your bid"
+                                        value={newBid}
+                                        onChange={(e) => setNewBid(e.target.value)}
+                                    />
+                                    <button 
+                                        className="bg-gray-900 text-white px-6 md:px-10 py-3 md:py-4 font-sans text-xs md:text-sm font-medium tracking-[2px] uppercase transition-all hover:bg-gold hover:text-black hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap"
+                                        onClick={handlePlaceBid}
+                                    >
+                                        Place Bid
+                                    </button>
+                                </div>
+
+                                {/* BID HISTORY */}
+                                <div className="bg-off-white p-6 md:p-8 shadow-sm">
+                                    <div className="text-[10px] md:text-xs tracking-[2px] uppercase text-gray-400 mb-6 font-medium">
+                                        Recent Bids
+                                    </div>
+                                    {auctionData.bidHistory.map((bid, index) => (
+                                        <div key={index} className="flex justify-between py-3 md:py-4 border-b border-light-gray last:border-b-0">
+                                            <span className="text-gold font-medium text-sm md:text-base">
+                                                ${bid.amount.toLocaleString()}
+                                            </span>
+                                            <span className="text-gray-400 text-sm md:text-base">
+                                                {bid.time}
+                                            </span>
                                         </div>
-                                    </div>
-
-                                    {/* BID INPUT */}
-                                    <div className="bid-input-section">
-                                        <input
-                                            type="number"
-                                            className="bid-input"
-                                            placeholder="Enter your bid"
-                                            value={newBid}
-                                            onChange={(e) => setNewBid(e.target.value)}
-                                        />
-                                        <button className="place-bid-btn" onClick={handlePlaceBid}>
-                                            Place Bid
-                                        </button>
-                                    </div>
-
-                                    {/* BID HISTORY */}
-                                    <div className="bid-history">
-                                        <div className="bid-history-label">Recent Bids</div>
-                                        {auctionData.bidHistory.map((bid, index) => (
-                                            <div key={index} className="bid-item">
-                                                <span className="bid-amount">${bid.amount.toLocaleString()}</span>
-                                                <span className="bid-time">{bid.time}</span>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
 
                             {/* RIGHT COLUMN - ARTWORK */}
-                            <div className="artwork-display">
-                                <div className="artwork-card">
-                                    <div className="artwork-frame">
+                            <div className="lg:sticky lg:top-32 lg:self-start">
+                                <div className="bg-white p-6 md:p-8 lg:p-12 shadow-2xl">
+                                    <div className="bg-off-white p-6 md:p-8 lg:p-10 shadow-sm mb-6 md:mb-8">
                                         <img 
                                             src={auctionData.imageUrl} 
                                             alt={auctionData.title}
-                                            className="artwork-image"
+                                            className="w-full h-auto block shadow-md"
                                         />
                                     </div>
                                     
                                     {adminMode && (
-                                        <div className="image-upload-section">
-                                            <label className="image-upload-label">
+                                        <div className="mb-6 md:mb-8 p-4 bg-off-white border-2 border-dashed border-gold">
+                                            <label className="block text-center cursor-pointer p-4 text-sm md:text-base text-gray-900">
                                                 Click to upload artwork image
-                                                <input type="file" accept="image/*" onChange={handleImageUpload} />
+                                                <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
                                             </label>
                                         </div>
                                     )}
 
-                                    <div className="artwork-details">
-                                        <div className="detail-item">
-                                            <div className="detail-label">Year</div>
+                                    <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 text-sm md:text-base">
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Year
+                                            </div>
                                             {adminMode ? (
                                                 <input
                                                     type="text"
-                                                    className="admin-input"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
                                                     value={auctionData.year}
                                                     onChange={(e) => setAuctionData({ ...auctionData, year: e.target.value })}
                                                 />
                                             ) : (
-                                                <div className="detail-value">{auctionData.year}</div>
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.year}
+                                                </div>
                                             )}
                                         </div>
-                                        <div className="detail-item">
-                                            <div className="detail-label">Medium</div>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Medium
+                                            </div>
                                             {adminMode ? (
                                                 <input
                                                     type="text"
-                                                    className="admin-input"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
                                                     value={auctionData.medium}
                                                     onChange={(e) => setAuctionData({ ...auctionData, medium: e.target.value })}
                                                 />
                                             ) : (
-                                                <div className="detail-value">{auctionData.medium}</div>
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.medium}
+                                                </div>
                                             )}
                                         </div>
-                                        <div className="detail-item">
-                                            <div className="detail-label">Dimensions</div>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Dimensions
+                                            </div>
                                             {adminMode ? (
                                                 <input
                                                     type="text"
-                                                    className="admin-input"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
                                                     value={auctionData.dimensions}
                                                     onChange={(e) => setAuctionData({ ...auctionData, dimensions: e.target.value })}
                                                 />
                                             ) : (
-                                                <div className="detail-value">{auctionData.dimensions}</div>
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.dimensions}
+                                                </div>
                                             )}
                                         </div>
-                                        <div className="detail-item">
-                                            <div className="detail-label">Edition</div>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Edition
+                                            </div>
                                             {adminMode ? (
                                                 <input
                                                     type="text"
-                                                    className="admin-input"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
                                                     value={auctionData.edition}
                                                     onChange={(e) => setAuctionData({ ...auctionData, edition: e.target.value })}
                                                 />
                                             ) : (
-                                                <div className="detail-value">{auctionData.edition}</div>
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.edition}
+                                                </div>
                                             )}
                                         </div>
                                     </div>
