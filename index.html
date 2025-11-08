@@ -165,9 +165,9 @@
 
                     {/* MAIN CONTENT */}
                     <main className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 py-8 md:py-12 lg:py-16">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+                        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16">
                             {/* LEFT COLUMN */}
-                            <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+                            <div className="flex flex-col gap-6 md:gap-8 lg:gap-10 order-1">
                                 {/* TITLE SECTION */}
                                 <div>
                                     {adminMode ? (
@@ -212,7 +212,103 @@
                                         </div>
                                     )}
                                 </div>
+                            </div>
 
+                            {/* ARTWORK - Shows second on mobile, right column on desktop */}
+                            <div className="order-2 lg:order-3 lg:sticky lg:top-32 lg:self-start lg:row-span-2">
+                                <div className="bg-white p-6 md:p-8 lg:p-12 shadow-2xl">
+                                    <div className="bg-off-white p-6 md:p-8 lg:p-10 shadow-sm mb-6 md:mb-8">
+                                        <img 
+                                            src={auctionData.imageUrl} 
+                                            alt={auctionData.title}
+                                            className="w-full h-auto block shadow-md"
+                                        />
+                                    </div>
+                                    
+                                    {adminMode && (
+                                        <div className="mb-6 md:mb-8 p-4 bg-off-white border-2 border-dashed border-gold">
+                                            <label className="block text-center cursor-pointer p-4 text-sm md:text-base text-gray-900">
+                                                Click to upload artwork image
+                                                <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
+                                            </label>
+                                        </div>
+                                    )}
+
+                                    <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 text-sm md:text-base">
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Year
+                                            </div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
+                                                    value={auctionData.year}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, year: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.year}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Medium
+                                            </div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
+                                                    value={auctionData.medium}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, medium: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.medium}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Dimensions
+                                            </div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
+                                                    value={auctionData.dimensions}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, dimensions: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.dimensions}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
+                                                Edition
+                                            </div>
+                                            {adminMode ? (
+                                                <input
+                                                    type="text"
+                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
+                                                    value={auctionData.edition}
+                                                    onChange={(e) => setAuctionData({ ...auctionData, edition: e.target.value })}
+                                                />
+                                            ) : (
+                                                <div className="text-gray-900 font-normal">
+                                                    {auctionData.edition}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* CURATOR'S NOTE AND BIDDING - Shows third on mobile, continues left column on desktop */}
+                            <div className="flex flex-col gap-6 md:gap-8 lg:gap-10 order-3 lg:order-2">
                                 {/* CURATOR'S NOTE */}
                                 <div className="bg-off-white p-6 md:p-8 lg:p-10 border-l-4 border-gold shadow-sm">
                                     <div className="text-[10px] md:text-xs tracking-[2px] uppercase text-gray-400 mb-4 font-medium">
@@ -314,99 +410,6 @@
                                             </span>
                                         </div>
                                     ))}
-                                </div>
-                            </div>
-
-                            {/* RIGHT COLUMN - ARTWORK */}
-                            <div className="lg:sticky lg:top-32 lg:self-start">
-                                <div className="bg-white p-6 md:p-8 lg:p-12 shadow-2xl">
-                                    <div className="bg-off-white p-6 md:p-8 lg:p-10 shadow-sm mb-6 md:mb-8">
-                                        <img 
-                                            src={auctionData.imageUrl} 
-                                            alt={auctionData.title}
-                                            className="w-full h-auto block shadow-md"
-                                        />
-                                    </div>
-                                    
-                                    {adminMode && (
-                                        <div className="mb-6 md:mb-8 p-4 bg-off-white border-2 border-dashed border-gold">
-                                            <label className="block text-center cursor-pointer p-4 text-sm md:text-base text-gray-900">
-                                                Click to upload artwork image
-                                                <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
-                                            </label>
-                                        </div>
-                                    )}
-
-                                    <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 text-sm md:text-base">
-                                        <div className="flex flex-col gap-2">
-                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
-                                                Year
-                                            </div>
-                                            {adminMode ? (
-                                                <input
-                                                    type="text"
-                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
-                                                    value={auctionData.year}
-                                                    onChange={(e) => setAuctionData({ ...auctionData, year: e.target.value })}
-                                                />
-                                            ) : (
-                                                <div className="text-gray-900 font-normal">
-                                                    {auctionData.year}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
-                                                Medium
-                                            </div>
-                                            {adminMode ? (
-                                                <input
-                                                    type="text"
-                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
-                                                    value={auctionData.medium}
-                                                    onChange={(e) => setAuctionData({ ...auctionData, medium: e.target.value })}
-                                                />
-                                            ) : (
-                                                <div className="text-gray-900 font-normal">
-                                                    {auctionData.medium}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
-                                                Dimensions
-                                            </div>
-                                            {adminMode ? (
-                                                <input
-                                                    type="text"
-                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
-                                                    value={auctionData.dimensions}
-                                                    onChange={(e) => setAuctionData({ ...auctionData, dimensions: e.target.value })}
-                                                />
-                                            ) : (
-                                                <div className="text-gray-900 font-normal">
-                                                    {auctionData.dimensions}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <div className="text-[10px] tracking-[2px] uppercase text-gray-400 font-medium">
-                                                Edition
-                                            </div>
-                                            {adminMode ? (
-                                                <input
-                                                    type="text"
-                                                    className="w-full p-2 md:p-3 font-sans border-2 border-gold bg-white focus:outline-none focus:shadow-lg"
-                                                    value={auctionData.edition}
-                                                    onChange={(e) => setAuctionData({ ...auctionData, edition: e.target.value })}
-                                                />
-                                            ) : (
-                                                <div className="text-gray-900 font-normal">
-                                                    {auctionData.edition}
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
